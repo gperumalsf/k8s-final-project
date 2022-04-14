@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: message-db-depl
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: messagedb
+  template:
+    metadata:
+      labels:
+        app: messagedb
+    spec:
+      containers:
+        - name: cont-messagedb
+          image: cashelbloom/img-messagedb:v1.0
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: message-db-secret
+                  key: message-db-root-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: message-db-secret
+                  key: message-db-root-pw

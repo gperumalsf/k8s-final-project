@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: socket-chat-app
+  labels:
+    name: socket-chat-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: socket-chat-app
+  template:
+    metadata:
+      labels:
+        app: socket-chat-app
+    spec:
+      containers:
+        - name: socket-chat-app
+          image: cashelbloom/socket-chat-app:v1.0
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: message-db-secret
+                  key: message-db-root-use
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: message-db-secret
+                  key: message-db-root-pw
+            - name: MESSAGE_DB_SERVER
+              value:
