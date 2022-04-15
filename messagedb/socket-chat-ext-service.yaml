@@ -4,8 +4,8 @@ metadata:
   name: socket-chat-ext-service
 spec:
   selector:
-    app: socket-chat-ext-app
-  type: LoadBalancer
+    app: socket-chat-app
+  type: NodePort
   ports:
     - protocol: TCP
       port: 8080

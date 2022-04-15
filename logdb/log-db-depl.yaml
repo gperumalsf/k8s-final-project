@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-db-depl
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: logdb
+  template:
+    metadata:
+      labels:
+        app: logdb
+    spec:
+      containers:
+        - name: cont-logdb
+          image: cashelbloom/img-logdb:v1.0
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: log-db-secret
+                  key: log-db-root-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: log-db-secret
+                  key: log-db-root-pw

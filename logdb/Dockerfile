@@ -4,13 +4,13 @@ ENV POSTGRES_USER postgres
 
 ENV POSTGRES_PASSWORD docker
 
-ENV POSTGRES_DB messagedb
+ENV POSTGRES_DB logdb
 
 ENV PGDATA /var/lib/postgresql/data/pgdata
 
 COPY init.sql /docker-entrypoint-initdb.d/
 
-EXPOSE 5432:55432
+EXPOSE 5432:5432
 
 
 

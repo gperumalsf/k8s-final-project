@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: message-db-service
+  name: log-db-service
 spec:
   selector:
-    app: messagedb
+    app: logdb
   ports:
     - protocol: TCP
-      port: 80
+      port: 5432
       targetPort: 5432
