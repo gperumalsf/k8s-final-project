@@ -8,33 +8,48 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Logs {
-
-    private String eventType;
-    private String logMsg;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String eventtype;
+    private String logmsg;
     private LocalDateTime timestmp;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEventtype() {
+        return eventtype;
+    }
+
+    public void setEventtype(String eventtype) {
+        this.eventtype = eventtype;
+    }
+
+    public String getLogmsg() {
+        return logmsg;
+    }
+
+    public void setLogmsg(String logmsg) {
+        this.logmsg = logmsg;
+    }
 
     public LocalDateTime getTimestmp() {
         return timestmp;
     }
+
     public void setTimestmp(LocalDateTime timestmp) {
         this.timestmp = timestmp;
     }
-    public String getLogMsg() {
-        return logMsg;
-    }
-    public void setLogMsg(String logMsg) {
-        this.logMsg = logMsg;
-    }
-    public String getEventType() {
-        return logMsg;
-    }
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
-    }
-    public Logs(String eventType, String logMsg) {
-        this.eventType = eventType;
-        this.logMsg = logMsg;
+
+    public Logs(String eventtype, String logmsg) {
+        this.eventtype = eventtype;
+        this.logmsg = logmsg;
     }
 
     

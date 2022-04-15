@@ -21,7 +21,7 @@ public class ChatController {
     MessagesRepo messagesRepo;
 
     @Autowired
-    LogsRepo LogsRepo;
+    LogsRepo logsRepo;
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage)
@@ -47,9 +47,9 @@ public class ChatController {
         // Add username in web socket session
         try{
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-        LogsRepo.save(new Logs("INFO",chatMessage.getSender()));
+        logsRepo.save(new Logs("INFO",chatMessage.getSender()));
     } catch(Exception e){
-        LogsRepo.save(new Logs("ERROR","error occured while adding user"));
+        logsRepo.save(new Logs("ERROR","error occured while adding user"));
         }
         return chatMessage;
     }

@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
         - name: socket-chat-app
-          image: cashelbloom/socket-chat-app:v1.0
+          image: cashelbloom/socket-chat-app
           ports:
-            - containerPort: 5432
+            - containerPort: 8080
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -30,5 +30,8 @@ spec:
                 secretKeyRef:
                   name: message-db-secret
                   key: message-db-root-pw
-            - name: MESSAGE_DB_SERVER
-              value:
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: message-db-configmap.yaml
+                  key:  message-db-url
