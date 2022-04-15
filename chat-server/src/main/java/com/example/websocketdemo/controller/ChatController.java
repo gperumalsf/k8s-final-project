@@ -32,7 +32,7 @@ public class ChatController {
         
         try{
         messagesRepo.save(messages);
-        logsRepo.save(new Logs("INFO", messages.toString()));
+        logsRepo.save(new Logs("INFO", "message: " + messages.getMsg() + " user: " + messages.getUsername() + " Timestamp:  " + messages.getTimestmp() ));
         } catch(Exception e ){
             logsRepo.save(new Logs("ERROR", "error occurred while writing to the database"));
         }
